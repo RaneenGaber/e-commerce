@@ -1,0 +1,153 @@
+<div
+  class="min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-500 to-emerald-700 p-6 relative overflow-hidden"
+>
+  <div
+    class="absolute top-[-40%] right-[-15%] w-[600px] h-[600px] bg-white/5 rounded-full animate-[float_20s_ease-in-out_infinite]"
+  ></div>
+  <div
+    class="absolute bottom-[-30%] left-[-10%] w-[400px] h-[400px] bg-white/5 rounded-full animate-[float_15s_ease-in-out_infinite_reverse]"
+  ></div>
+
+  <div
+    class="w-full max-w-md relative z-10 animate-[slideUp_0.6s_cubic-bezier(0.4,0,0.2,1)]"
+  >
+    <div class="text-center mb-8">
+      <div
+        class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg animate-[pulse_2s_ease-in-out_infinite]"
+      >
+        <svg
+          width="48"
+          height="48"
+          viewBox="0 0 48 48"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M24 4L44 14V34L24 44L4 34V14L24 4Z"
+            fill="white"
+            stroke="white"
+            stroke-width="2"
+          />
+          <text
+            x="24"
+            y="30"
+            font-size="20"
+            font-weight="bold"
+            text-anchor="middle"
+            fill="#00C48C"
+          >
+            H
+          </text>
+        </svg>
+      </div>
+      <h1 class="text-4xl font-extrabold text-white mb-1 tracking-tight">
+        Halan
+      </h1>
+      <p class="text-white/90 text-base font-light">
+        Financial Empowerment for All
+      </p>
+    </div>
+
+    <mat-card
+      class="shadow-2xl rounded-3xl overflow-hidden backdrop-blur-md bg-card"
+    >
+      <mat-card-content class="p-10">
+
+        <div class="text-center mb-8">
+          <h2 class="text-2xl font-bold text-gray-800 mb-2">Welcome Back</h2>
+          <p class="text-gray-500 text-sm">
+            Sign in to continue to your account
+          </p>
+        </div>
+
+        <form
+          [formGroup]="loginForm"
+          (ngSubmit)="onSubmit()"
+          class="flex flex-col gap-5"
+        >
+          <mat-form-field class="w-full">
+            <mat-label>Username</mat-label>
+            <input
+              matInput
+              formControlName="username"
+              placeholder="Enter your username"
+              autocomplete="username"
+              [disabled]="isLoading()"
+            />
+            <mat-icon matPrefix>person</mat-icon>
+            @if (hasError('username', 'required') ||
+            hasError('username', 'minlength')) {
+              <mat-error>{{ getErrorMessage('username') }}</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field class="w-full">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              [type]="passwordVisible() ? 'text' : 'password'"
+              formControlName="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              [disabled]="isLoading()"
+            />
+            <mat-icon matPrefix>lock</mat-icon>
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              (click)="togglePasswordVisibility()"
+              [disabled]="isLoading()"
+              [attr.aria-label]="
+                passwordVisible() ? 'Hide password' : 'Show password'
+              "
+            >
+              <mat-icon>{{
+                  passwordVisible() ? "visibility_off" : "visibility"
+                }}
+              </mat-icon>
+            </button>
+            @if (hasError('password', 'required') ||
+            hasError('password', 'minlength')) {
+              <mat-error>{{ getErrorMessage('password') }}</mat-error>
+            }
+          </mat-form-field>
+
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            class="w-full h-14 font-semibold text-white hover:bg-emerald-600 transition-all duration-300 disabled:text-gray-400"
+            [disabled]="isLoading()"
+          >
+            <div class="flex item-center gap-5">
+              @if (isLoading()) {
+                <mat-spinner diameter="20"></mat-spinner>
+                <span>Signing in...</span>
+              } @else {
+                <span>Sign In</span>
+                <mat-icon>arrow_forward</mat-icon>
+              }
+            </div>
+          </button>
+        </form>
+
+        <div class="text-center mt-6">
+          <p class="text-sm text-gray-500">
+            Need help?
+            <a
+              href="mailto:support@halan.com"
+              class="text-emerald-500 hover:text-emerald-600 font-semibold underline-offset-2 hover:underline"
+            >Contact Support</a
+            >
+          </p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <div class="text-center mt-8 text-white/80 text-sm">
+      <p class="font-medium">&copy; 2024 Halan. All rights reserved.</p>
+      <p class="text-xs opacity-80">Egypt's Leading FinTech Super App</p>
+    </div>
+  </div>
+</div>

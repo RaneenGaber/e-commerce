@@ -3,12 +3,12 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError, Observable, tap, throwError} from 'rxjs';
 import {LoginResponse} from '../../models/interfaces/login-response';
 import {LoginCredentials} from '../../models/interfaces/login-credentials';
+import {environment} from '../../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Auth {
-  private apiUrl = '';
   private readonly TOKEN_KEY = 'auth_token';
   public isAuthenticated = signal<boolean>(this.hasValidToken());
 
@@ -18,7 +18,7 @@ export class Auth {
 
 
   login(credentials: LoginCredentials): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.apiUrl}/auth/login`, credentials)
+    return this.http.post<LoginResponse>(`${environment.apiUrl}/auth/login`, credentials)
       .pipe(
         tap((response:LoginResponse) => this.handleLoginSuccess(response)),
         catchError(error => this.handleError(error))
