@@ -1,12 +1,13 @@
  <div class="flex justify-between items-center p-4 gap-5">
-    <mat-form-field class="w-full" (keydown.enter)="filter()">
+    <mat-form-field class="w-full">
       <mat-label>Filter by Brand</mat-label>
       <mat-select
         [value]="selectedBrand()"
         (selectionChange)="onBrandChange($event.value)"
         placeholder="Brands"
       >
-        @for (brand of uniqueBrands(); track brand) {
+        <mat-option value="">All Brands</mat-option>
+        @for (brand of brands(); track brand) {
           <mat-option [value]="brand">{{ brand }}</mat-option>
         }
       </mat-select>
