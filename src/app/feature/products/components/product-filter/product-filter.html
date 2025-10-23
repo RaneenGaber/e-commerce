@@ -1,0 +1,33 @@
+ <div class="flex justify-between items-center p-4 gap-5">
+    <mat-form-field class="w-full" (keydown.enter)="search()">
+      <mat-label>Filter by Brand</mat-label>
+      <mat-select
+        [value]="selectedBrand()"
+        (selectionChange)="onBrandChange($event.value)"
+        placeholder="Brands"
+      >
+        @for (brand of uniqueBrands(); track brand) {
+          <mat-option [value]="brand">{{ brand }}</mat-option>
+        }
+      </mat-select>
+      <mat-icon matSuffix>business</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+      <mat-label>Search Products</mat-label>
+      <input
+        matInput
+        type="text"
+        [value]="searchTerm()"
+        (input)="onSearchChange($event.target.value)"
+        placeholder="Search by product name or description..."
+      >
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <div class="flex items-center justify-center gap-2">
+      <button matButton="filled" (click)="search()" >Apply</button>
+      <button  matButton="outlined" (click)="reset()"
+              [disabled]="!selectedBrand() && !searchTerm()">Reset</button>
+    </div>
+  </div>
