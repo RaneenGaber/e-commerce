@@ -1,0 +1,12 @@
+<div class="products-container">
+  <div class="filter-section">
+    <app-product-filter
+      (onFilter)="onFilteredProductsChange($event)">
+    </app-product-filter>
+  </div>
+
+  <div class="scrollable-content">
+    <app-product-list [products]="filteredProducts()"></app-product-list>
+  </div>
+</div>
+
