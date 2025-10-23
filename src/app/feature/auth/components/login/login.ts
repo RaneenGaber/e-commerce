@@ -9,7 +9,7 @@ import {MatIcon} from '@angular/material/icon';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatCard, MatCardContent} from '@angular/material/card';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
-import {Auth} from '../../../../core/services/auth/auth';
+import {AuthService} from '../../../../core/services/auth/auth';
 
 @Component({
   selector: 'app-login',
@@ -35,7 +35,7 @@ export class Login {
   loginForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private authService: Auth,
+              private authService: AuthService,
               private router: Router,
               private snackBar: MatSnackBar) {
     this.loginForm = this.fb.group({

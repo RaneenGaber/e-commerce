@@ -1,6 +1,6 @@
 import {Injectable, signal} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {catchError, Observable, tap, throwError} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {catchError, Observable, tap} from 'rxjs';
 import {LoginResponse} from '../../models/interfaces/login-response';
 import {LoginCredentials} from '../../models/interfaces/login-credentials';
 import {environment} from '../../../../../environments/environment';
@@ -9,7 +9,7 @@ import {ErrorHandle} from '../utils/error-handle';
 @Injectable({
   providedIn: 'root'
 })
-export class Auth {
+export class AuthService {
   private readonly TOKEN_KEY = 'auth_token';
   public isAuthenticated = signal<boolean>(this.hasValidToken());
 
@@ -54,7 +54,6 @@ export class Auth {
     const token = this.getToken();
     return !!token;
   }
-
 
   private checkAuthStatus(): void {
     const isAuth = this.hasValidToken();
