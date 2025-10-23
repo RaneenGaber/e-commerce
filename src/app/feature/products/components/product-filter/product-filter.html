@@ -1,5 +1,5 @@
  <div class="flex justify-between items-center p-4 gap-5">
-    <mat-form-field class="w-full" (keydown.enter)="search()">
+    <mat-form-field class="w-full" (keydown.enter)="filter()">
       <mat-label>Filter by Brand</mat-label>
       <mat-select
         [value]="selectedBrand()"
@@ -26,7 +26,7 @@
     </mat-form-field>
 
     <div class="flex items-center justify-center gap-2">
-      <button matButton="filled" (click)="search()" >Apply</button>
+      <button matButton="filled" (click)="filter()" >Apply</button>
       <button  matButton="outlined" (click)="reset()"
               [disabled]="!selectedBrand() && !searchTerm()">Reset</button>
     </div>

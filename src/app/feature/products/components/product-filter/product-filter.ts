@@ -16,11 +16,10 @@ import {MatIconModule} from '@angular/material/icon';
     MatButtonModule,
     MatIconModule
   ],
-  templateUrl: './product-filter.html',
-  styleUrl: './product-filter.css',
+  templateUrl: './product-filter.html'
 })
 export class ProductFilter {
-  onSearch = output<{ selectedBrand: string, searchTerm: string }>();
+  onFilter = output<{ selectedBrand: string, searchTerm: string }>();
   uniqueBrands = signal<string[]>([
     'Acme',
     'Globex',
@@ -42,16 +41,16 @@ export class ProductFilter {
   reset() {
     this.selectedBrand.set('');
     this.searchTerm.set('');
-    this.onSearch.emit({
+    this.onFilter.emit({
       selectedBrand: '',
       searchTerm: ''
     })
 
   }
 
-  search() {
+  filter() {
     if (this.selectedBrand() || this.searchTerm()) {
-      this.onSearch.emit({
+      this.onFilter.emit({
         selectedBrand: this.selectedBrand(),
         searchTerm: this.searchTerm()
       })
