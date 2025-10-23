@@ -1,6 +1,10 @@
-@if (products() && products().length > 0){
-  @for (product of products(); track product.id){
-    <app-product-card [product]="product"></app-product-card>
+  @if (products() && products().length > 0){
+      @for (product of products(); track product.id){
+          <app-product-card [product]="product"></app-product-card>
+      }
+  } @else {
+    <div class="h-full flex items-center justify-center font-bold-400">
+      <p>No products found matching your criteria.</p>
+    </div>
   }
-}
 
