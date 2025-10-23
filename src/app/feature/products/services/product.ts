@@ -9,7 +9,7 @@ import { ErrorHandle } from '../../../core/services/utils/error-handle';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsService {
+export class Products {
 
   private readonly baseUrl = `${environment.apiUrl}/products`;
 
