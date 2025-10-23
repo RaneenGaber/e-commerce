@@ -4,6 +4,7 @@ import {catchError, Observable, tap, throwError} from 'rxjs';
 import {LoginResponse} from '../../models/interfaces/login-response';
 import {LoginCredentials} from '../../models/interfaces/login-credentials';
 import {environment} from '../../../../../environments/environment';
+import {ErrorHandle} from '../utils/error-handle';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class Auth {
   private readonly TOKEN_KEY = 'auth_token';
   public isAuthenticated = signal<boolean>(this.hasValidToken());
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private errorHandle:ErrorHandle) {
     this.checkAuthStatus();
   }
 
@@ -21,7 +23,7 @@ export class Auth {
     return this.http.post<LoginResponse>(`${environment.apiUrl}/auth/login`, credentials)
       .pipe(
         tap((response:LoginResponse) => this.handleLoginSuccess(response)),
-        catchError(error => this.handleError(error))
+        catchError(error => this.errorHandle.handleError(error, 'login'))
       );
   }
 
@@ -59,35 +61,4 @@ export class Auth {
     this.isAuthenticated.set(isAuth);
   }
 
-  private handleError(error: HttpErrorResponse): Observable<never> {
-    let errorMessage = 'An error occurred during login';
-
-    if (error.error instanceof ErrorEvent) {
-      // Client-side error
-      errorMessage = `Error: ${error.error.message}`;
-    } else {
-      // Server-side error
-      switch (error.status) {
-        case 401:
-          errorMessage = 'Invalid username or password';
-          break;
-        case 403:
-          errorMessage = 'Access forbidden';
-          break;
-        case 404:
-          errorMessage = 'Login service not found';
-          break;
-        case 500:
-          errorMessage = 'Server error. Please try again later';
-          break;
-        case 0:
-          errorMessage = 'Network error. Please check your connection';
-          break;
-        default:
-          errorMessage = error.error?.message || 'Login failed. Please try again';
-      }
-    }
-
-    return throwError(() => new Error(errorMessage));
-  }
 }
