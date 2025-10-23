@@ -1,10 +1,40 @@
 <div class="flex flex-col w-full h-full">
+
+  @if (!loading() && !error()) {
     <app-product-filter
+      [brands]="brands()"
       (onFilter)="onFilteredProductsChange($event)">
     </app-product-filter>
 
-  <div class="flex-1 overflow-y-auto scroll-smooth">
-    <app-product-list [products]="filteredProducts()"></app-product-list>
-  </div>
+    <div class="flex-1 overflow-y-auto scroll-smooth">
+      <app-product-list [products]="filteredProducts()"></app-product-list>
+    </div>
+
+    @if (!loading()) {
+      <mat-paginator
+        (page)="handlePageEvent($event)"
+        [length]="totalItems()"
+        [pageSize]="pageSize"
+        [showFirstLastButtons]="true"
+        [disabled]="false"
+        [hidePageSize]="false"
+        [pageSizeOptions]="[5,totalItems()]"
+        [pageIndex]="currentPage()"
+        aria-label="Select page">
+      </mat-paginator>
+    }
+
+
+  }
+  @if(loading()) {
+    <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      @for (item of [1, 2, 3, 4, 5, 6, 7, 8]; track item) {
+        <app-product-skeleton></app-product-skeleton>
+      }
+    </div>
+  }
+  @if (!error()){
+    <p>{{error()}}</p>
+  }
 </div>
 
