@@ -6,8 +6,7 @@ import {ProductList} from '../../components/product-list/product-list';
 @Component({
   selector: 'app-products',
   imports: [ProductFilter,ProductList],
-  templateUrl: './products.html',
-  styleUrl: './products.css',
+  templateUrl: './products.html'
 })
 export class Products {
   filteredProducts = signal<Product[]>([]);
@@ -111,14 +110,12 @@ export class Products {
   onFilteredProductsChange(filterCriteria: { selectedBrand: string, searchTerm: string }) {
     let filtered = this.products();
 
-    // Filter by brand
     if (filterCriteria.selectedBrand) {
       filtered = filtered.filter(product =>
         product.brandName === filterCriteria.selectedBrand
       );
     }
 
-    // Filter by product name or description
     if (filterCriteria.searchTerm) {
       const term = filterCriteria.searchTerm.toLowerCase();
       filtered = filtered.filter(product =>
