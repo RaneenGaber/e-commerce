@@ -1,1 +1,12 @@
-<p>cart works!</p>
+<div class="flex flex-col w-full h-full p-6 bg-gray-200">
+
+  <app-header [pageTitle]="'Cart'" [breadcrumb]="['products','cart']"></app-header>
+
+  @if (cartItems$ | async ;as cartItems){
+    <div class="flex-1 overflow-y-auto scroll-smooth">
+      <app-cart-items [items]="cartItems"></app-cart-items>
+    </div>
+  }
+
+
+</div>
