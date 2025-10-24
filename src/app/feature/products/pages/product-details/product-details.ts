@@ -11,8 +11,7 @@ import {ProductList} from '../../components/product-list/product-list';
 @Component({
   selector: 'app-product-details',
   imports: [Header,ProductSkeleton,ProductList],
-  templateUrl: './product-details.html',
-  styleUrl: './product-details.css',
+  templateUrl: './product-details.html'
 })
 export class ProductDetails implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
