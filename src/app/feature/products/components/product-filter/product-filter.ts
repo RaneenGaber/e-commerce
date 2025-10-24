@@ -5,7 +5,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
-import {ProductFilterService} from '../../services/product-filter.service';
+import {ProductFilterService} from '../../services/product-filter';
 
 @Component({
   selector: 'app-product-filter',

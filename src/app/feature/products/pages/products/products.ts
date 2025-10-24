@@ -5,11 +5,11 @@ import {ProductList} from '../../components/product-list/product-list';
 import {ProductSkeleton} from '../../components/product-skeleton/product-skeleton';
 import {ProductService} from '../../services/product';
 import {ProductsResponse} from '../../models/interfaces/products-response';
-import {ProductFilterService} from '../../services/product-filter.service';
 import {Subject, takeUntil} from 'rxjs';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 import {Header} from '../../../../shared/components/header/header';
+import {ProductFilterService} from '../../services/product-filter';
 
 @Component({
   selector: 'app-products',

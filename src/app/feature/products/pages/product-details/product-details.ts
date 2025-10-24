@@ -1,4 +1,4 @@
-import {Component, NgModule, OnDestroy, OnInit, signal} from '@angular/core';
+import {Component, OnDestroy, OnInit, signal} from '@angular/core';
 import {Product} from '../../models/interfaces/product';
 import {Subject, takeUntil} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
