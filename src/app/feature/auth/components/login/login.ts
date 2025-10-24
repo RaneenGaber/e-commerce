@@ -10,6 +10,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatCard, MatCardContent} from '@angular/material/card';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import {AuthService} from '../../../../core/services/auth/auth';
+import {RoutePath} from '../../../../core/models/enums/route-path';
 
 @Component({
   selector: 'app-login',
@@ -58,7 +59,7 @@ export class Login {
       next: () => {
         this.isLoading.set(false);
         this.showSnackBar('Login successful! Redirecting...', 'success');
-        this.router.navigate(['/products']);
+        this.router.navigate([`/${RoutePath.PRODUCT}`]);
       },
       error: (error) => {
         this.isLoading.set(false);

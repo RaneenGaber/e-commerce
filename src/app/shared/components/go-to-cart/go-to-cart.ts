@@ -5,6 +5,7 @@ import { selectCartItemsCount } from '../../../store/cart/cart.selectors';
 import { Router } from '@angular/router';
 import {MatIcon} from '@angular/material/icon';
 import {AsyncPipe} from '@angular/common';
+import {RoutePath} from '../../../core/models/enums/route-path';
 
 @Component({
   selector: 'app-go-to-cart',
@@ -24,7 +25,7 @@ export class GoToCart {
   }
 
   navigateToCart() {
-    this.router.navigate([`/cart`]);
+    this.router.navigate([`/${RoutePath.CART}`]);
 
   }
 

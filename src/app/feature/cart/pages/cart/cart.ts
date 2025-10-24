@@ -8,6 +8,7 @@ import {Store} from '@ngrx/store';
 import {AsyncPipe} from '@angular/common';
 import {Router} from '@angular/router';
 import {CartSummary} from '../../components/cart-summary/cart-summary';
+import {RoutePath} from '../../../../core/models/enums/route-path';
 @Component({
   selector: 'app-cart',
   imports: [CartItems, CartSummary, Header, AsyncPipe],
@@ -41,6 +42,6 @@ export class Cart implements OnInit, OnDestroy {
    * Continue shopping - navigate to products
    */
   continueShopping(): void {
-    this.router.navigate(['/products']);
+    this.router.navigate([`/${RoutePath.PRODUCT}`]);
   }
 }

@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {NgClass} from '@angular/common';
 import {MatIconModule} from '@angular/material/icon';
 import {AuthService} from '../../../core/services/auth/auth';
+import {RoutePath} from '../../../core/models/enums/route-path';
 
 @Component({
   selector: 'app-header',
@@ -20,13 +21,13 @@ export class Header {
   goToPage(crumb: string ,last: boolean) {
 
     if (!last){
-      this.router.navigate([`/${crumb.toLowerCase()}`]);
+      this.router.navigate([`/${crumb}`]);
     }
   }
 
   logout() {
     this._authService.logout();
-    this.router.navigate(['login'])
+    this.router.navigate([`/${RoutePath.LOGIN}`])
 
   }
 }

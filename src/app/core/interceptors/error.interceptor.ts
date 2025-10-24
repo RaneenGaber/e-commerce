@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {RoutePath} from '../models/enums/route-path';
 
 export function ErrorInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
   const router = inject(Router);
@@ -30,7 +31,7 @@ export function ErrorInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn)
             errorTitle = 'Unauthorized';
             errorMessage = 'Please login again to continue';
             // Redirect to login page
-            router.navigate(['/login']);
+            router.navigate([`/${RoutePath.LOGIN}`]);
             break;
           case 403:
             errorTitle = 'Access Denied';

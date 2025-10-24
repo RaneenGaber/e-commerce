@@ -7,6 +7,7 @@ import {DecimalPipe} from '@angular/common';
 import { Product } from '../../models/interfaces/product';
 import {Router} from '@angular/router';
 import {CartService} from '../../../cart/services/cart';
+import {RoutePath} from '../../../../core/models/enums/route-path';
 
 @Component({
   selector: 'app-product-card',
@@ -35,7 +36,7 @@ export class ProductCard {
   }
 
   navigateToDetails(): void {
-    this.router.navigate(['/products', this.product().id]);
+    this.router.navigate([`/${RoutePath.PRODUCT}`, this.product().id]);
   }
 
 }

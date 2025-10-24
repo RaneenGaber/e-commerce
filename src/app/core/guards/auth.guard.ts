@@ -1,6 +1,7 @@
 import {CanActivateFn, Router} from '@angular/router';
 import {AuthService} from '../services/auth/auth';
 import {inject} from '@angular/core';
+import {RoutePath} from '../models/enums/route-path';
 
 
 export const AuthGuard: CanActivateFn = (route, state) => {
@@ -11,6 +12,6 @@ export const AuthGuard: CanActivateFn = (route, state) => {
     return true;
   }
 
-  router.navigate(['/login']);
+  router.navigate([`/${RoutePath.LOGIN}`]);
   return false;
 };

@@ -5,6 +5,7 @@ import { selectCartItemsCount, selectCartTotal } from '../../../../store/cart/ca
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import {CartService} from '../../services/cart';
+import {RoutePath} from '../../../../core/models/enums/route-path';
 
 @Component({
   selector: 'app-cart-summary',
@@ -31,6 +32,6 @@ export class CartSummary {
   }
 
   continueShopping(): void {
-    this.router.navigate(['/products']);
+    this.router.navigate([`/${RoutePath.PRODUCT}`]);
   }
 }
