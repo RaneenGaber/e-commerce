@@ -163,24 +163,6 @@ NgRx is configured with:
 - **Effects**: Side effects for persistence
 - **DevTools**: Development debugging support
 
-## 🧪 Testing
-
-### Running Tests
-
-```bash
-# Unit tests
-npm test
-
-# E2E tests (if configured)
-npm run e2e
-```
-
-### Test Structure
-
-- **Unit Tests**: Component and service testing
-- **Integration Tests**: Feature module testing
-- **E2E Tests**: End-to-end user flows
-
 ## 📦 Build & Deployment
 
 ### Development Build
@@ -266,9 +248,6 @@ The build process generates:
 4. Add tests if needed
 5. Submit a pull request
 
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## 🆘 Support
 
