@@ -1,12 +1,27 @@
-<div class="flex flex-col w-full h-full p-6 bg-gray-200">
+<div class="flex flex-col gap-4 w-full h-screen overflow-y-hidden p-6 bg-gray-200">
 
   <app-header [pageTitle]="'Cart'" [breadcrumb]="['products','cart']"></app-header>
 
-  @if (cartItems$ | async ;as cartItems){
-    <div class="flex-1 overflow-y-auto scroll-smooth">
-      <app-cart-items [items]="cartItems"></app-cart-items>
-    </div>
-  }
+  <div class="overflow-y-auto ">
+      <!-- Cart Items Section -->
+      <div class="w-full pb-4">
+        @if (cartItems$ | async ;as cartItems){
+          <app-cart-items [items]="cartItems"></app-cart-items>
+        } @else {
+          <div class="bg-white rounded-lg shadow-sm p-6 text-center">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Your Cart is Empty</h2>
+            <p class="text-gray-600 mb-4">Add some products to get started!</p>
+            <button
+              (click)="continueShopping()"
+              class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200"
+            >
+              Continue Shopping
+            </button>
+          </div>
+        }
+      </div>
 
+    <app-cart-summary></app-cart-summary>
 
+  </div>
 </div>

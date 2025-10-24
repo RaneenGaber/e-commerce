@@ -1,0 +1,52 @@
+<div class="bg-gray-100 rounded-lg p-4 shadow-sm">
+  <!-- Cart Summary Header -->
+  <div class="mb-4">
+    <h3 class="text-lg font-semibold text-gray-800">Cart Summary</h3>
+  </div>
+
+  <div class="flex justify-between items-start mb-4">
+    <div class="space-y-2">
+      <div class="flex items-center">
+        <span class="text-sm text-gray-600">Items:</span>
+        <span class="text-sm font-medium text-gray-800 ml-2">{{ cartItemsCount$ | async }}</span>
+      </div>
+      <div class="flex items-center">
+        <span class="text-sm text-gray-600">Subtotal:</span>
+        <span class="text-sm font-medium text-gray-800 ml-2"> {{(cartTotal$ | async) | number:'1.2-2'}} </span>
+      </div>
+    </div>
+
+    <div class="flex flex-col space-y-2">
+      <button
+        (click)="clearCart()"
+        class="bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm font-medium py-1.5 px-3 rounded transition-colors duration-200"
+        [disabled]="(cartItemsCount$ | async) === 0"
+      >
+        Clear Cart
+      </button>
+
+      <button
+        (click)="proceedToCheckout()"
+        class="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white text-sm font-medium py-1.5 px-3 rounded transition-colors duration-200"
+        [disabled]="(cartItemsCount$ | async) === 0"
+      >
+        Proceed {{ (cartItemsCount$ | async) === 0 ? '(Disabled)' : '' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Empty Cart Message -->
+  @if ((cartItemsCount$ | async) === 0){
+    <div class="text-center py-2">
+      <p class="text-gray-500 text-sm">Your cart is empty</p>
+      <button
+        (click)="continueShopping()"
+        class="mt-1 text-blue-600 hover:text-blue-700 text-xs font-medium"
+      >
+        Continue Shopping
+      </button>
+    </div>
+
+  }
+
+</div>

@@ -11,53 +11,7 @@ export class CartService {
   private readonly CART_STORAGE_KEY = 'shopping_cart';
   private store = inject(Store);
 
-
   constructor() {}
-
-  /**
-   * Get current cart items (synchronous - for immediate access)
-   * Note: This method should be avoided in favor of observables
-   */
-  getCart(): Product[] {
-    try {
-      const state = (this.store as any).getState();
-      return state?.cart?.items || [];
-    } catch (error) {
-      console.warn('Could not get cart state synchronously:', error);
-      return [];
-    }
-  }
-
-  /**
-   * Get total number of items in cart
-   */
-  getTotalItems(): number {
-    const items = this.getCart();
-    return items.reduce((total, item) => total + item.quantity, 0);
-  }
-
-  /**
-   * Get total price of all items in cart
-   */
-  getTotalPrice(): number {
-    const items = this.getCart();
-    return items.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0
-    );
-  }
-
-  /**
-   * Get cart summary
-   */
-  getCartSummary() :Cart{
-    const items:Product[] = this.getCart();
-    return {
-      items,
-      totalItems: this.getTotalItems(),
-      totalPrice: this.getTotalPrice(),
-    };
-  }
 
   /**
    * Clear entire cart

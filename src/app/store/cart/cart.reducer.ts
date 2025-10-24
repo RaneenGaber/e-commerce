@@ -1,6 +1,6 @@
-import { createReducer, on } from '@ngrx/store';
+import {createReducer, on} from '@ngrx/store';
 import * as CartActions from './cart.actions';
-import { initialCartState } from './cart.state';
+import {initialCartState} from './cart.state';
 import {Product} from '../../feature/products/models/interfaces/product';
 
 export const cartReducer = createReducer(
@@ -54,6 +54,11 @@ export const cartReducer = createReducer(
   on(CartActions.removeFromCart, (state, { id }) => ({
     ...state,
     items: state.items.filter((item:Product) => item.id !== id),
+  })),
+
+  on(CartActions.clearCart, (state) => ({
+    ...state,
+    items: [],
   })),
 
   on(CartActions.syncCart, (state, { items }) => ({

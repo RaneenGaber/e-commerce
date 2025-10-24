@@ -6,9 +6,11 @@ import {Header} from '../../../../shared/components/header/header';
 import {selectCartItems, selectCartItemsCount, selectCartTotal} from '../../../../store/cart/cart.selectors';
 import {Store} from '@ngrx/store';
 import {AsyncPipe} from '@angular/common';
+import {Router} from '@angular/router';
+import {CartSummary} from '../../components/cart-summary/cart-summary';
 @Component({
   selector: 'app-cart',
-  imports: [CartItems, Header,AsyncPipe],
+  imports: [CartItems, CartSummary, Header, AsyncPipe],
   templateUrl: './cart.html',
   styleUrl: './cart.css',
 })
@@ -21,6 +23,7 @@ export class Cart implements OnInit, OnDestroy {
 
   constructor(
     private store: Store,
+    private router: Router
   ) {
     this.cartItems$ = this.store.select(selectCartItems);
     this.cartItemsCount$ = this.store.select(selectCartItemsCount);
@@ -34,5 +37,10 @@ export class Cart implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-
+  /**
+   * Continue shopping - navigate to products
+   */
+  continueShopping(): void {
+    this.router.navigate(['/products']);
+  }
 }
