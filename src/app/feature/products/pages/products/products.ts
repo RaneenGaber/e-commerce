@@ -10,10 +10,11 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 import {Header} from '../../../../shared/components/header/header';
 import {ProductFilterService} from '../../services/product-filter';
+import {GoToCart} from '../../../../shared/components/go-to-cart/go-to-cart';
 
 @Component({
   selector: 'app-products',
-  imports: [Header,ProductFilter, ProductList, ProductSkeleton, MatPaginatorModule,MatProgressSpinnerModule],
+  imports: [GoToCart, Header, ProductFilter, ProductList, ProductSkeleton, MatPaginatorModule, MatProgressSpinnerModule],
   templateUrl: './products.html'
 })
 export class Products implements OnInit, OnDestroy {
@@ -80,4 +81,5 @@ export class Products implements OnInit, OnDestroy {
       this.getProductList();
 
   }
+
 }

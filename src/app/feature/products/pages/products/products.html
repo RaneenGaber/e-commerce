@@ -1,6 +1,8 @@
 <div class="flex flex-col w-full h-full p-6 bg-gray-200">
 
-  <app-header [pageTitle]="'Products'" [breadcrumb]="['products']"></app-header>
+  <app-header [pageTitle]="'Products'" [breadcrumb]="['products']">
+    <app-go-to-cart></app-go-to-cart>
+  </app-header>
 
   @if (!loading() && !error()) {
     <app-product-filter
@@ -25,8 +27,6 @@
         aria-label="Select page">
       </mat-paginator>
     }
-
-
   }
 
   @if(loading()) {
