@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, signal} from '@angular/core';
+import {Component, NgModule, OnDestroy, OnInit, signal} from '@angular/core';
 import {Product} from '../../models/interfaces/product';
 import {Subject, takeUntil} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -7,10 +7,11 @@ import {ProductResponse} from '../../models/interfaces/product-response';
 import {Header} from '../../../../shared/components/header/header';
 import {ProductSkeleton} from '../../components/product-skeleton/product-skeleton';
 import {ProductList} from '../../components/product-list/product-list';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product-details',
-  imports: [Header,ProductSkeleton,ProductList],
+  imports: [Header,ProductSkeleton,ProductList,FormsModule],
   templateUrl: './product-details.html'
 })
 export class ProductDetails implements OnInit, OnDestroy {
