@@ -1,0 +1,46 @@
+@if (data().length > 0) {
+  <div class="overflow-x-auto w-full flex max-h-[60vh]">
+    <table class="w-full">
+      <thead class="bg-white sticky top-0 z-10 w-full">
+      <tr class="w-full bg-primary">
+        @for (column of columns(); track column.header; ) {
+          <th class="py-4 min-w-[100px] text-center">{{ column.header }}</th>
+        }
+        @if (buttons().length > 0) {
+          <th class="text-left py-5 pl-4 min-w-[100px]">actions</th>
+        }
+      </tr>
+      </thead>
+      <tbody class="w-full grow overflow-y-auto">
+        @for (row of data(); track row.id; let even = $even; let p = $index) {
+          <tr class="w-full h-[50px]" [ngClass]="p % 2 === 0 ? 'even' : 'odd'">
+            @for (column of columns(); track i; let i = $index) {
+              <td class="py-2 min-w-[100px] text-center pr-2">
+                <div [matTooltip]="column.cell(row)">
+                  <div [innerHTML]="column.cell(row)"></div>
+                </div>
+              </td>
+            }
+            @if (buttons().length > 0) {
+              <td class="text-left py-2 pl-4 min-w-[100px]">
+                <div class="flex flex-row">
+                  @for (button of buttons(); track btnIndex; let btnIndex = $index) {
+                    @if (button.isShown ? button.isShown(row) : true) {
+                      <button
+                        (click)='button.payload(row)'
+                        class="w-full p-4 items-center">
+                        <mat-icon class='hover:text-primary'>{{ button?.iconName }}</mat-icon>
+                        <span class='mx-2'>{{ button.name }}</span>
+                      </button>
+                    }
+                  }
+                </div>
+              </td>
+            }
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}
+
