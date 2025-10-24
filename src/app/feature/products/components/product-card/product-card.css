@@ -8,6 +8,7 @@
   transform: translateY(-4px);
   border-color: var(--halan-200);
   box-shadow: 0 20px 40px rgba(0, 196, 140, 0.25);
+  background-color: var(--halan-50);
 }
 
 .brand-badge {

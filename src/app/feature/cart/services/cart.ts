@@ -66,6 +66,12 @@ export class CartService {
     this.store.dispatch(CartActions.clearCart());
   }
 
+  /**
+   * Add To cart
+   */
+  addToCart(product:Product): void {
+    this.store.dispatch(CartActions.addToCart({product}));
+  }
 
   /**
    * Public: Sync cart from storage
