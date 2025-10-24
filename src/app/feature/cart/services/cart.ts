@@ -74,8 +74,16 @@ export class CartService {
   }
 
   /**
+   * Remove From cart
+   */
+  removeFromCart(product:Product): void {
+    this.store.dispatch(CartActions.removeFromCart({ id: product.id }));
+  }
+
+  /**
    * Public: Sync cart from storage
    */
+
   syncCartFromStorage(items: Product[]): void {
     this.store.dispatch(CartActions.syncCart({ items }));
   }
