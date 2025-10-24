@@ -27,6 +27,7 @@
 .add-to-cart-btn {
   background: linear-gradient(135deg, #00A076 0%, #008A65 100%);
   box-shadow: 0 10px 25px rgba(0, 196, 140, 0.3);
+  color: white !important;
 }
 
 .add-to-cart-btn:active {
