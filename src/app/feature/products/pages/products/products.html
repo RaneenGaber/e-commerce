@@ -1,4 +1,6 @@
-<div class="flex flex-col w-full h-full">
+<div class="flex flex-col w-full h-full p-6 bg-gray-200">
+
+  <app-header [pageTitle]="'Products'" [breadcrumb]="['products']"></app-header>
 
   @if (!loading() && !error()) {
     <app-product-filter
@@ -26,6 +28,7 @@
 
 
   }
+
   @if(loading()) {
     <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       @for (item of [1, 2, 3, 4, 5, 6, 7, 8]; track item) {
@@ -33,6 +36,7 @@
       }
     </div>
   }
+
   @if (!error()){
     <p>{{error()}}</p>
   }

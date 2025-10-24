@@ -4,15 +4,16 @@ import {ProductFilter} from '../../components/product-filter/product-filter';
 import {ProductList} from '../../components/product-list/product-list';
 import {ProductSkeleton} from '../../components/product-skeleton/product-skeleton';
 import {ProductService} from '../../services/product';
-import {ProductResponse} from '../../models/interfaces/product-response';
+import {ProductsResponse} from '../../models/interfaces/products-response';
 import {ProductFilterService} from '../../services/product-filter.service';
 import {Subject, takeUntil} from 'rxjs';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
+import {Header} from '../../../../shared/components/header/header';
 
 @Component({
   selector: 'app-products',
-  imports: [ProductFilter, ProductList, ProductSkeleton, MatPaginatorModule,MatProgressSpinnerModule],
+  imports: [Header,ProductFilter, ProductList, ProductSkeleton, MatPaginatorModule,MatProgressSpinnerModule],
   templateUrl: './products.html'
 })
 export class Products implements OnInit, OnDestroy {
@@ -53,7 +54,7 @@ export class Products implements OnInit, OnDestroy {
     this._productService.getAllProducts(this.currentPage(), this.pageSize()).pipe(
       takeUntil(this.destroy$)
     ).subscribe({
-      next: (res: ProductResponse) => {
+      next: (res: ProductsResponse) => {
         this.products.set(res.items || []);
         this.productFilterService.setProducts(res.items || []);
         this.totalPages.set(Math.ceil((res.total || 0) / this.pageSize()));
