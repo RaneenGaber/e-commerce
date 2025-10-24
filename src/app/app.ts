@@ -3,11 +3,10 @@ import {RouterOutlet} from '@angular/router';
 import {Store} from '@ngrx/store';
 import * as CartActions from './store/cart/cart.actions';
 import {LoadingComponent} from './shared/components/loading/loading.component';
-import {NotificationComponent} from './shared/components/notification/notification.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, LoadingComponent, NotificationComponent],
+  imports: [RouterOutlet, LoadingComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

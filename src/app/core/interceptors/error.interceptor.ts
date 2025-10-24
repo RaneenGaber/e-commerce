@@ -3,11 +3,12 @@ import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpRequest } from '@angul
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { NotificationService } from '../services/notification/notification.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 export function ErrorInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
   const router = inject(Router);
-  const notificationService = inject(NotificationService);
+  const snackBar = inject(MatSnackBar);
+
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
@@ -16,7 +17,6 @@ export function ErrorInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn)
 
       if (error.error instanceof ErrorEvent) {
         // Client-side error
-        errorTitle = 'Client Error';
         errorMessage = `Client Error: ${error.error.message}`;
         console.error('Client Error:', error.error);
       } else {
@@ -68,18 +68,14 @@ export function ErrorInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn)
             errorTitle = 'Server Error';
             errorMessage = `Server Error: ${error.status} - ${error.statusText}`;
         }
-
-        console.error('Server Error:', {
-          status: error.status,
-          statusText: error.statusText,
-          message: error.message,
-          url: error.url,
-          error: error.error
-        });
       }
 
-      // Show user-friendly error notification
-      notificationService.error(errorTitle, errorMessage);
+      snackBar.open(errorTitle, 'Close', {
+          duration: 4000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: 'snackbar-error',
+        });
 
       return throwError(() => error);
     })

@@ -6,7 +6,6 @@ import { LoadingService } from '../services/loading/loading.service';
 export function LoadingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
   const loadingService = inject(LoadingService);
 
-
   // Start loading
   loadingService.startLoading();
 
