@@ -1,0 +1,17 @@
+<button
+  (click)="navigateToCart()"
+  class="relative m-2 inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md transition-all duration-200 transform hover:scale-105"
+>
+  Cart
+  <mat-icon class="ml-2"> shopping_cart</mat-icon>
+
+  @if (cartItemsCount$ | async; as count) {
+    @if (count > 0) {
+      <span
+        class="absolute -top-2 -right-2 inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 rounded-full"
+      >
+          {{ count }}
+        </span>
+    }
+  }
+</button>

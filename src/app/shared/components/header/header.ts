@@ -5,7 +5,7 @@ import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-header',
-  imports: [NgClass,MatIconModule],
+  imports: [NgClass, MatIconModule],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
@@ -22,8 +22,4 @@ export class Header {
     }
   }
 
-  navigateToCart() {
-    this.router.navigate([`/cart`]);
-
-  }
 }
