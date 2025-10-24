@@ -1,0 +1,97 @@
+<div class="flex flex-col w-full h-full p-6 bg-gray-200">
+
+  <app-header [pageTitle]="'Product Details'" [breadcrumb]="['products',product().productName]"></app-header>
+
+  @if (!loading() && !error()) {
+
+    <div class="flex-1 overflow-y-auto scroll-smooth">
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 p-4 bg-white rounded-xl">
+
+        <div class="flex items-center justify-center">
+          <img
+            [src]="product().imageUrl"
+            [alt]="product().productName"
+            class="max-w-full h-auto object-contain rounded-lg"
+          />
+          @if (!product().imageUrl) {
+            <div class="text-gray-400">
+              <svg class="w-32 h-32 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+              <p class="mt-4 text-lg">Product Image</p>
+            </div>
+          }
+        </div>
+
+        <div class="flex flex-col space-y-6">
+
+          <div class="flex justify-between items-center">
+            <h2 class="text-2xl font-bold text-gray-900 mb-2">{{ product()?.productName }}</h2>
+            <span class="items-center px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 font-medium">
+              {{ product()?.brandName || 'N/A' }}
+            </span>
+          </div>
+
+          <!-- Price -->
+          <div class="flex justify-between items-center border-t border-b border-gray-200 py-4">
+            <p class="text-2xl font-bold text-indigo-600">${{ product()?.price }}</p>
+
+            <div class="flex items-center space-x-4">
+              <button
+                (click)="decrementQuantity()"
+                [disabled]="quantity <= 1"
+                class="w-10 h-10 flex items-center justify-center bg-gray-200 hover:bg-gray-300 disabled:bg-gray-100 disabled:cursor-not-allowed rounded-lg font-bold text-gray-700 transition-colors duration-200"
+              >
+                -
+              </button>
+              <!--                  [(ngModel)]="quantity"-->
+
+              <input
+                type="number"
+                [min]="1"
+                class="w-20 h-10 text-center border-2 border-gray-300 rounded-lg font-semibold focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none"
+                readonly
+              />
+              <button
+                (click)="incrementQuantity()"
+                class="w-10 h-10 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-lg font-bold text-gray-700 transition-colors duration-200"
+              >
+                +
+              </button>
+            </div>
+          </div>
+
+          <button
+            (click)="addToCart(product())"
+            class="w-full px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg shadow-lg transition-all duration-200 transform hover:scale-105"
+          >
+            Add to Cart
+          </button>
+
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Description</h3>
+            <p class="text-gray-600 leading-relaxed">{{ product().description }}</p>
+          </div>
+
+        </div>
+      </div>
+
+      @if (recommendedProducts()) {
+        <h2 class="text-2xl font-bold text-gray-900 my-6">Recommended Products</h2>
+        <app-product-list [products]="recommendedProducts()"></app-product-list>
+      }
+    </div>
+
+  }
+
+  @if (loading()) {
+      <app-product-skeleton></app-product-skeleton>
+  }
+
+  @if (!error()) {
+    <p>{{ error() }}</p>
+  }
+</div>
+
