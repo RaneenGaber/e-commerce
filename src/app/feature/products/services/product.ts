@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, Observable } from 'rxjs';
 import { environment } from '../../../../../environments/environment';
-import { ProductResponse } from '../models/interfaces/product-response';
-import { Product } from '../models/interfaces/product';
+import { ProductsResponse } from '../models/interfaces/products-response';
 import { ErrorHandle } from '../../../core/services/utils/error-handle';
+import {ProductResponse} from '../models/interfaces/product-response';
 
 @Injectable({
   providedIn: 'root'
@@ -24,12 +24,12 @@ export class ProductService {
    * @param size - Number of items per page
    * @returns Observable of ProductResponse
    */
-  getAllProducts(page: number = 0, size: number = 10): Observable<ProductResponse> {
+  getAllProducts(page: number = 0, size: number = 10): Observable<ProductsResponse> {
     const params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
 
-    return this.http.get<ProductResponse>(this.baseUrl, { params }).pipe(
+    return this.http.get<ProductsResponse>(this.baseUrl, { params }).pipe(
       catchError(error => this.errorHandle.handleError(error, 'products'))
     );
   }
@@ -39,8 +39,8 @@ export class ProductService {
    * @param id - Product ID
    * @returns Observable of Product
    */
-  getProductById(id: string): Observable<Product> {
-    return this.http.get<Product>(`${this.baseUrl}/${id}`).pipe(
+  getProductById(id: string): Observable<ProductResponse> {
+    return this.http.get<ProductResponse>(`${this.baseUrl}/${id}`).pipe(
       catchError(error => this.errorHandle.handleError(error, 'products'))
     );
   }
@@ -52,13 +52,13 @@ export class ProductService {
    * @param size - Number of items per page
    * @returns Observable of ProductResponse
    */
-  searchProducts(query: string, page: number = 0, size: number = 10): Observable<ProductResponse> {
+  searchProducts(query: string, page: number = 0, size: number = 10): Observable<ProductsResponse> {
     const params = new HttpParams()
       .set('search', query)
       .set('page', page.toString())
       .set('size', size.toString());
 
-    return this.http.get<ProductResponse>(`${this.baseUrl}/search`, { params }).pipe(
+    return this.http.get<ProductsResponse>(`${this.baseUrl}/search`, { params }).pipe(
       catchError(error => this.errorHandle.handleError(error, 'products'))
     );
   }
