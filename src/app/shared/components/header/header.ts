@@ -2,6 +2,7 @@ import {Component, input} from '@angular/core';
 import {Router} from '@angular/router';
 import {NgClass} from '@angular/common';
 import {MatIconModule} from '@angular/material/icon';
+import {AuthService} from '../../../core/services/auth/auth';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,8 @@ export class Header {
   pageTitle= input.required<string>();
   breadcrumb = input<string[]>([]);
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+              private _authService: AuthService) {}
 
   goToPage(crumb: string ,last: boolean) {
 
@@ -22,4 +24,9 @@ export class Header {
     }
   }
 
+  logout() {
+    this._authService.logout();
+    this.router.navigate(['login'])
+
+  }
 }

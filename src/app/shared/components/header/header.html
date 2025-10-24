@@ -25,5 +25,9 @@
       }
     </nav>
   </div>
-  <ng-content></ng-content>
+  <div>
+    <ng-content></ng-content>
+    <button class="p-4 bg-gray-500 text-white rounded-xl rounded-lg shadow-md transition-all duration-200 transform hover:scale-105" (click)="logout()">logout</button>
+  </div>
+
 </div>
