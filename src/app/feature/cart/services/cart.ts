@@ -1,6 +1,5 @@
 import { Injectable, inject } from '@angular/core';
 import {Product} from '../../products/models/interfaces/product';
-import {Cart} from '../models/interfaces/cart';
 import { Store } from '@ngrx/store';
 import * as CartActions from '../../../store/cart/cart.actions';
 
@@ -13,6 +12,12 @@ export class CartService {
 
   constructor() {}
 
+  /**
+   * Clear entire Local Storage
+   */
+  clearFromStorage(): void {
+    localStorage.removeItem(this.CART_STORAGE_KEY);
+  }
   /**
    * Clear entire cart
    */

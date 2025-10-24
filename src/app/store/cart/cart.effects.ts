@@ -32,6 +32,7 @@ export class CartEffects {
         ofType(
           CartActions.addToCart,
           CartActions.removeFromCart,
+          CartActions.clearCart,
           CartActions.syncCart
         ),
         withLatestFrom(this.store.select(selectCartItems)),
@@ -43,17 +44,17 @@ export class CartEffects {
     { dispatch: false }
   );
 
+  // Clear cart in service when clearing in store
   clearCart$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(CartActions.clearCart),
         tap(() => {
-          this.cartService.clearCart();
+          this.cartService.clearFromStorage();
         })
       ),
     { dispatch: false }
   );
-
 
   syncCart$ = createEffect(
     () =>
