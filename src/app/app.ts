@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
+import {Store} from '@ngrx/store';
+import * as CartActions from './store/cart/cart.actions';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +9,10 @@ import {RouterOutlet} from '@angular/router';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
+export class App implements OnInit {
+  constructor(private store: Store<any>) {}
+
+  ngOnInit(): void {
+    this.store.dispatch(CartActions.loadCart());
+  }
 }
