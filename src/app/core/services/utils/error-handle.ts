@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ErrorHandle {
+
+  constructor(private router: Router) {}
 
   /**
    * Handle HTTP errors with customizable context
@@ -27,6 +30,7 @@ export class ErrorHandle {
           break;
         case 401:
           errorMessage = this.getUnauthorizedMessage(context);
+          this.router.navigate([`/login`]);
           break;
         case 403:
           errorMessage = 'Access forbidden';
