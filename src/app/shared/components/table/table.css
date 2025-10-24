@@ -1,0 +1,26 @@
+.actions:hover mat-icon {
+  color: #fff !important;
+}
+.mat-mdc-header-cell {
+  font-weight: 700;
+  font-size: 14px;
+}
+.even{
+  background-color: var(--halan-50);
+
+}
+.odd{
+  background-color: white;}
+th{
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 16px;
+  background-color: var(--halan-600);
+  color: white;
+}
+td{
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 12px;
+  color: #1C304C;
+}
