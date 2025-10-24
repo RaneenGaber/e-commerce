@@ -11,10 +11,5 @@ import {Router} from '@angular/router';
 export class ProductList {
   products = input<Product[]>([]);
 
-  constructor(
-    public router: Router,
-  ) {}
-  navigateToDetails(productId: string): void {
-    this.router.navigate(['/products', productId]);
-  }
+
 }
