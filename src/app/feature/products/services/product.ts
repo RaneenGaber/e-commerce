@@ -3,7 +3,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, Observable } from 'rxjs';
 import { environment } from '../../../../../environments/environment';
 import { ProductsResponse } from '../models/interfaces/products-response';
-import { ErrorHandle } from '../../../core/services/utils/error-handle';
 import {ProductResponse} from '../models/interfaces/product-response';
 
 @Injectable({
@@ -14,9 +13,7 @@ export class ProductService {
   private readonly baseUrl = `${environment.apiUrl}/products`;
 
   constructor(
-    private http: HttpClient,
-    private errorHandle: ErrorHandle
-  ) {}
+    private http: HttpClient) {}
 
   /**
    * Get all products with pagination
@@ -29,9 +26,7 @@ export class ProductService {
       .set('page', page.toString())
       .set('size', size.toString());
 
-    return this.http.get<ProductsResponse>(this.baseUrl, { params }).pipe(
-      catchError(error => this.errorHandle.handleError(error, 'products'))
-    );
+    return this.http.get<ProductsResponse>(this.baseUrl, { params })
   }
 
   /**
@@ -40,9 +35,7 @@ export class ProductService {
    * @returns Observable of Product
    */
   getProductById(id: string): Observable<ProductResponse> {
-    return this.http.get<ProductResponse>(`${this.baseUrl}/${id}`).pipe(
-      catchError(error => this.errorHandle.handleError(error, 'products'))
-    );
+    return this.http.get<ProductResponse>(`${this.baseUrl}/${id}`)
   }
 
   /**
@@ -58,8 +51,6 @@ export class ProductService {
       .set('page', page.toString())
       .set('size', size.toString());
 
-    return this.http.get<ProductsResponse>(`${this.baseUrl}/search`, { params }).pipe(
-      catchError(error => this.errorHandle.handleError(error, 'products'))
-    );
+    return this.http.get<ProductsResponse>(`${this.baseUrl}/search`, { params })
   }
 }

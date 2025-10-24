@@ -4,7 +4,6 @@ import {catchError, Observable, tap} from 'rxjs';
 import {LoginResponse} from '../../models/interfaces/login-response';
 import {LoginCredentials} from '../../models/interfaces/login-credentials';
 import {environment} from '../../../../../environments/environment';
-import {ErrorHandle} from '../utils/error-handle';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +12,7 @@ export class AuthService {
   private readonly TOKEN_KEY = 'auth_token';
   public isAuthenticated = signal<boolean>(this.hasValidToken());
 
-  constructor(private http: HttpClient,
-              private errorHandle:ErrorHandle) {
+  constructor(private http: HttpClient) {
     this.checkAuthStatus();
   }
 
@@ -23,7 +21,6 @@ export class AuthService {
     return this.http.post<LoginResponse>(`${environment.apiUrl}/auth/login`, credentials)
       .pipe(
         tap((response:LoginResponse) => this.handleLoginSuccess(response)),
-        catchError(error => this.errorHandle.handleError(error, 'login'))
       );
   }
 
