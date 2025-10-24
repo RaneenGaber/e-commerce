@@ -166,6 +166,7 @@ button, a, [role="button"] {
 }
 .btn{
   background: linear-gradient(135deg, #00A076, #008A65) !important;
+  color: white !important;
 }
 /* Loading states */
 .loading {
