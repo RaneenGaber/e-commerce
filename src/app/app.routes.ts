@@ -21,6 +21,13 @@ export const routes: Routes = [
     title: 'Products - E-Commerce App',
   },
 
+  {
+    path: 'cart',
+    loadChildren: () => import('./feature/cart/cart.routes'),
+    canActivate: [AuthGuard],
+    title: 'Cart - E-Commerce App',
+  },
+
 
   // Wildcard route - 404 Not Found
   {

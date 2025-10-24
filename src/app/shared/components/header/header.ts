@@ -23,6 +23,7 @@ export class Header {
   }
 
   navigateToCart() {
+    this.router.navigate([`/cart`]);
 
   }
 }
