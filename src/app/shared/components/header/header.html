@@ -1,0 +1,45 @@
+<div class="mb-2 flex justify-between items-center overflow-hidden">
+  <div>
+    <h1 class="text-2xl font-bold">
+      {{ pageTitle() }}
+    </h1>
+    <nav class="hidden md:flex items-center gap-1" aria-label="Breadcrumb Alternative">
+      @for (crumb of breadcrumb(); track crumb; let last = $last;) {
+        <div class="flex items-center">
+                    <span
+                      [ngClass]="{
+                        'cursor-default font-bold ': last,
+                        ' text-blue-700 cursor-pointer underline': !last,
+                        }"
+                      [attr.aria-current]="last ? 'page' : null"
+                      [tabindex]="last ? -1 : 0"
+                      (click)="goToPage(crumb, last)"
+                      (keydown.enter)="goToPage(crumb, last)">
+                        {{ crumb }}
+                    </span>
+
+          @if (!last) {
+            <mat-icon>arrow_forward_ios</mat-icon>
+          }
+        </div>
+      }
+    </nav>
+  </div>
+
+  <button
+    (click)="navigateToCart()"
+    class="relative m-2 inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md transition-all duration-200 transform hover:scale-105"
+  >
+    Cart
+    <mat-icon class="ml-2"> shopping_cart</mat-icon>
+
+    @if (true) {
+      <span
+        class="absolute -top-2 -right-2 inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 rounded-full"
+      >
+              {{ 44 }}
+      </span>
+    }
+  </button>
+
+</div>
